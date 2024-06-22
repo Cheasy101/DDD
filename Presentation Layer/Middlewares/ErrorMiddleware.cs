@@ -1,6 +1,8 @@
-using DDD.APP.Exceptions;
 using System.Net;
 using System.Text.Json;
+using Exceptions.Exceptions;
+using EmployeeAlreadyExistsException = DDD.APP.Exceptions.EmployeeAlreadyExistsException;
+using EmployeeNotFoundException = DDD.APP.Exceptions.EmployeeNotFoundException;
 
 namespace DDD.APP.Presentation_Layer.Middlewares
 {
@@ -22,16 +24,16 @@ namespace DDD.APP.Presentation_Layer.Middlewares
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-
-            var response = new { message = exception.Message };
-            var jsonResponse = JsonSerializer.Serialize(response);
-
             context.Response.StatusCode = exception switch
             {
                 EmployeeNotFoundException => (int)HttpStatusCode.NotFound,
                 EmployeeAlreadyExistsException => (int)HttpStatusCode.Conflict,
+                DuplicateDataException => (int)HttpStatusCode.BadRequest,
                 _ => (int)HttpStatusCode.InternalServerError
             };
+
+            var response = new { message = exception.Message };
+            var jsonResponse = JsonSerializer.Serialize(response);
 
             return context.Response.WriteAsync(jsonResponse);
         }

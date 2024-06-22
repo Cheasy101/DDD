@@ -29,10 +29,10 @@ namespace DDD.APP.Presentation_Layer.Controllers
             return CreatedAtAction(nameof(GetById), new { id = employeeDto.Id }, employeeDto);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, EmployeeDto employeeDto)
+        [HttpPut]
+        public async Task<ActionResult> Update( EmployeeDto employeeDto)
         {
-            if (id != employeeDto.Id) return BadRequest();
+            // if (id != employeeDto.Id) return BadRequest();
             await employeeService.UpdateAsync(employeeDto);
             return NoContent();
         }
