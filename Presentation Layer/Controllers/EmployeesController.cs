@@ -1,7 +1,6 @@
-using DDD.APP.ApplicationLayer.Interfaces;
+using Application.ApplicationLayer.Dto;
+using Application.ApplicationLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using DDD.APP.ApplicationLayer.Dto;
-
 namespace DDD.APP.Presentation_Layer.Controllers
 {
     [ApiController]

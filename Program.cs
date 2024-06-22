@@ -1,6 +1,3 @@
-using DDD.APP.ApplicationLayer.Interfaces;
-using DDD.APP.Infrastructure_Layer.Persistence;
-using DDD.APP.Infrastructure_Layer.Repositories;
 using DDD.APP.Presentation_Layer.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -15,11 +12,11 @@ builder.Configuration
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    // options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureServices();
+// builder.Services.AddApplicationServices();
+// builder.Services.AddInfrastructureServices();
 
 builder.Services.AddSwaggerGen(c =>
 {
