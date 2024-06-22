@@ -1,6 +1,6 @@
-using DDD.APP.ApplicationLayer.Dto;
 using DDD.APP.ApplicationLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using DDD.APP.ApplicationLayer.Dto;
 
 namespace DDD.APP.Presentation_Layer.Controllers
 {
@@ -26,30 +26,16 @@ namespace DDD.APP.Presentation_Layer.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(EmployeeDto employeeDto)
         {
-            try
-            {
-                await employeeService.AddAsync(employeeDto);
-                return CreatedAtAction(nameof(GetById), new { id = employeeDto.Id }, employeeDto);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            await employeeService.AddAsync(employeeDto);
+            return CreatedAtAction(nameof(GetById), new { id = employeeDto.Id }, employeeDto);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, EmployeeDto employeeDto)
         {
             if (id != employeeDto.Id) return BadRequest();
-            try
-            {
-                await employeeService.UpdateAsync(employeeDto);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            await employeeService.UpdateAsync(employeeDto);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
