@@ -1,3 +1,5 @@
+using Application.ApplicationLayer.Interfaces;
+using Application.ApplicationLayer.Services;
 using DDD.APP;
 using Infrastructure.InfrastructureLayer.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +15,10 @@ builder.Configuration
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDbContext>((_, options) =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 builder.Services.AddProjectServices();
 
@@ -28,7 +32,22 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    dbContext.Database.Migrate();
+
+    for (int i = 0; i < 100; i++)
+    {
+        try
+        {
+            dbContext.Database.Migrate();
+            dbContext.Database.EnsureCreated();
+            break; 
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Attempt {i+1} to migrate database failed. Retrying in 5 seconds...");
+            Console.WriteLine(ex.Message);
+            System.Threading.Thread.Sleep(1000); // Подождать 5 секунд перед повторной попыткой
+        }
+    }
 }
 
 if (app.Environment.IsDevelopment())
