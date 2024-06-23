@@ -1,8 +1,6 @@
 using System.Net;
 using System.Text.Json;
 using Exceptions.Exceptions;
-using EmployeeAlreadyExistsException = DDD.APP.Exceptions.EmployeeAlreadyExistsException;
-using EmployeeNotFoundException = DDD.APP.Exceptions.EmployeeNotFoundException;
 
 namespace DDD.APP.Presentation_Layer.Middlewares
 {
