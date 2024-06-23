@@ -12,3 +12,7 @@
 ![image](https://github.com/Cheasy101/DDD/assets/70900183/19a69b7d-906f-40b6-ad9b-393f6a067327)
 ![image](https://github.com/Cheasy101/DDD/assets/70900183/8b3922bd-935c-47d4-a2f9-370c11b67fad)
 ![image](https://github.com/Cheasy101/DDD/assets/70900183/15feb1e6-caf5-4cff-a956-7e15b91cd419)
+-
+![image](https://github.com/Cheasy101/DDD/assets/70900183/9f8d4969-0373-4afd-ad8c-3eacfe564db2)
+старался делать по паттерну ддд. но создал отдельный солюшн с эксепшнами для мидлваре. 
+хотел еще MediatR завести, но не успеваю
